@@ -46,8 +46,8 @@ class SaveData:
         today = datetime.date.today()
         hour = datetime.datetime.now().hour
         try:
-
-            path1 = '.../video' + str(today) + '/' + str(hour)
+            # TODO 此处存储为为相对路径 应改为绝对路径
+            path1 = 'D:/jiajian/School/shixi/1/cankao/video' + str(today) + '/' + str(hour)
             if not os.path.exists(path1):
                 os.makedirs(path1, exist_ok=True)
         except Exception as e:
@@ -68,6 +68,7 @@ class SaveData:
         time.sleep(1)
         try:
             user_name = element.find_element(by=By.XPATH,
+                                             #       //*[@id="pl_feedlist_index"]/div[4]/div[4]       /div/div[1]/div[2]/div[1]/div[2]/a
                                              value=f'//*[@id="pl_feedlist_index"]/div[2]/div[{length}]/div/div[1]/div[2]/div[1]/div[2]/a').text
             print("用户名爬取成功")
         except:
@@ -91,8 +92,18 @@ class SaveData:
         # 找到元素
         bo.select_new_window()
         time.sleep(1)
-        element_new = bo.driver.find_element(by=By.XPATH,
+        try:
+            element_new = bo.driver.find_element(by=By.XPATH,
                                              value='//a[@class="ALink_none_1w6rm ProfileHeader_alink_tjHJR ProfileHeader_pointer_2yKGQ"]')
+        except:
+            try:
+                bo.driver.refresh()
+                time.sleep(5)
+                element_new = bo.driver.find_element(by=By.XPATH,
+                                             value='//a[@class="ALink_none_1w6rm ProfileHeader_alink_tjHJR ProfileHeader_pointer_2yKGQ"]')
+            except:
+                print("反爬")
+                pass
         # 获取href属性值
         href = element_new.get_attribute('href')
         print(href)
@@ -114,6 +125,7 @@ class SaveData:
                                value='//a[2][@class="ALink_none_1w6rm ProfileHeader_alink_tjHJR ProfileHeader_pointer_2yKGQ"]/span/span').click()'''
 
         # 微博内容
+        # //*[@id="pl_feedlist_index"]/div[2]/div[1]/div/div[1]/div[2]/p
         bo.select_new_window()
         time.sleep(1)
         try:
@@ -210,7 +222,7 @@ class BrowserOp:
         time.sleep(20)
 
     @staticmethod
-    def get_config(path="...config/config.json"):
+    def get_config(path="D:/jiajian/School/shixi/1/cankao/weibo/config/config.json"):
         config = ""
         with open(path, mode="r", encoding="utf8") as file:
             config = json.load(file)

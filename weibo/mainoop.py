@@ -4,6 +4,15 @@ from selenium.webdriver.common.by import By
 from data import MysqlOp as MysqlOp
 from weibo.util.utiloop import SaveData, BrowserOp
 
+# 深度学习没爬,计算机视觉没爬完
+# 爬了的：ChatGPT,AI画图,深度学习
+
+# "深度学习","ChatGPT","计算机视觉","知识图谱","数据挖掘",
+# "AI画图","自动驾驶","语音识别","算力","半导体",
+# "国产芯片","元宇宙","云计算","物联网","加密技术",
+# "数字化","去中心化","5G","电子支付","区块链",
+# "边缘计算","脑机接口","自然语言处理","OpenAI"
+
 
 def get():
     config = BrowserOp.get_config()
